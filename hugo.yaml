@@ -49,7 +49,16 @@ params:
   # Search
   search:
     enable: true
-    type: "pagefind"
+    type: "flexsearch"
+    flexsearch:
+      # Set to true to show sections/subsections in search results
+      showResult: true
+      # Set to true to show parent section in search results
+      showParent: true
+      # Set to true to include content of the page in search
+      indexContent: true
+      # Set to true to enable fuzzy search
+      fuzzy: true
 
   # Sidebar
   sidebar:
