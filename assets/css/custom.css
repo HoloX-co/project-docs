@@ -1,0 +1,60 @@
+* {
+  --gray-900: #161c25;
+  --gray-900-80: #161c25d6;
+  --PRIMARY-main: #2099e2;
+  --PRIMARY-dark: #006bb0;
+  font-family: 'Regular', sans-serif !important;
+}
+
+
+.bg {
+  background-image: url('../images/Background_gradient_light.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.dark .bg {
+  background-image: url('../images/Background_gradient_dark.png');
+}
+
+/* Custom Container */
+.custom-container {
+  max-width: 100%;
+  margin: 0 auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+h3, h4 {
+  color: #919eab;
+}
+
+.dark .main-title .highlight-text {
+  color: #ffffff;
+}
+
+.dark .custom-container h3, h4 {
+  color: #69778c;
+}
+
+.cta-button {
+  background-color: var(--PRIMARY-main);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 7px 30px;
+  border-radius: 7px;
+  display: inline-block;
+  text-align: center;
+}
+
+.cta-button:hover {
+  background-color: var(--PRIMARY-dark);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.theme-toggle:hover svg {
+  transform: scale(1.09) translateZ(0px); 
+}
