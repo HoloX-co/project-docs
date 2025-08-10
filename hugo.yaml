@@ -8,9 +8,6 @@ publishDir: "public"
 contentDir: "content"
 staticDir: "static"
 
-# Theme configuration
-theme: "hextra"
-
 # Module configuration for Hextra
 module:
   imports:
