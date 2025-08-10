@@ -1,17 +1,8 @@
-baseURL: "https://holox-co.github.io/project-docs"
+baseURL: https://example.com/
 languageCode: "en-us"
 title: "HoloX Project Documentation"
 description: "Central repository for project documentation, decisions, research, and POCs"
 
-# Build configuration
-publishDir: "public"
-contentDir: "content"
-staticDir: "static"
-
-# Module configuration for Hextra
-module:
-  imports:
-    - path: github.com/imfing/hextra
 
 markup:
   goldmark:
@@ -24,79 +15,45 @@ markup:
 enableRobotsTXT: true
 enableGitInfo: true
 
-params:
-  # Navigation
-  navbar:
-    displayTitle: true
-    displayLogo: false
-    width: "wide"
+defaultContentLanguage: en
+languages:
+  en:
+    languageName: English
+    weight: 1
 
-  # Footer
-  footer:
-    displayCopyright: true
-    displayPoweredBy: false
+module:
+  imports:
+    - path: github.com/imfing/hextra
 
-  # Theme
-  theme:
-    default: "system"
-    displayToggle: true
-
-  # Edit page
-  editPage:
-    enable: true
-    base: "https://github.com/HoloX-co/project-docs/edit/main/content"
-
-  # Search
-  search:
-    enable: true
-    type: "flexsearch"
-    flexsearch:
-      # Set to true to show sections/subsections in search results
-      showResult: true
-      # Set to true to show parent section in search results
-      showParent: true
-      # Set to true to include content of the page in search
-      indexContent: true
-      # Set to true to enable fuzzy search
-      fuzzy: true
-
-  # Sidebar
-  sidebar:
-    collapse: false
-
-# Menu configuration
+# Edit page
+editPage:
+  enable: true
+  base: "https://github.com/HoloX-co/project-docs/edit/main/content"
+  
 menu:
   main:
-    - name: "Architecture"
-      url: "/architecture/"
-      weight: 10
-    - name: "Decisions"
-      url: "/decisions/"
-      weight: 20
-    - name: "Research"
-      url: "/research/"
-      weight: 30
-    - name: "POCs"
-      url: "/poc/"
-      weight: 40
-    - name: "Guides"
-      url: "/guides/"
-      weight: 50
-    - name: "Meetings"
-      url: "/meetings/"
-      weight: 60
+    - identifier: documentation
+      name: Documentation
+      pageRef: /docs
+      weight: 1
+    - name: Search
+      weight: 4
+      params:
+        type: search
 
 # Taxonomies
 taxonomies:
   tag: "tags"
   category: "categories"
 
-# Security - Allow necessary commands for module functionality
-security:
-  exec:
-    allow:
-      - "^git$"
-      - "^go$"
-      - "^npx$"
-      - "^postcss$"
-      - "^dart-sass-embedded$"
+params:
+  description: Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.
+
+  navbar:
+      displayTitle: false
+      displayLogo: true
+      logo:
+        path: images/logo_light.svg
+        dark: images/logo_dark.svg
+        width: 120
+      width: wide
