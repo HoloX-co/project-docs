@@ -1,3 +1,11 @@
+---
+title: "ADR-0001: Documentation Strategy"
+description: "Architectural Decision Record for documentation repository strategy"
+date: 2025-08-10
+tags: ["adr", "documentation", "strategy"]
+weight: 1
+---
+
 # Documentation Repository Strategy
 
 ## Repository Setup Recommendations

@@ -1,4 +1,4 @@
-name: Deploy MkDocs to GitHub Pages
+name: Deploy Hugo with Hextra to GitHub Pages
 
 on:
   push:
@@ -21,20 +21,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          submodules: recursive
           fetch-depth: 0
           
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          python-version: '3.x'
+          hugo-version: 'latest'
+          extended: true
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install Hextra theme
+        run: |
+          git submodule add https://github.com/imfing/hextra.git themes/hextra || true
+          git submodule update --init --recursive
           
       - name: Install dependencies
         run: |
-          pip install mkdocs-material
-          pip install mkdocs-git-revision-date-localized-plugin
+          npm install -D postcss postcss-cli autoprefixer
           
       - name: Build site
-        run: mkdocs build --clean
+        run: hugo --minify
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -42,7 +53,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'site'
+          path: 'public'
 
   deploy:
     environment:

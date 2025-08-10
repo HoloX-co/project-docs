@@ -1,3 +1,9 @@
+---
+title: "HoloX Project Documentation"
+description: "Central repository for project documentation, decisions, research, and POCs"
+toc: false
+---
+
 # HoloX Project Documentation
 
 Welcome to the central documentation repository for HoloX projects. This repository serves as a single source of truth for all project-related documentation, decisions, research, and proof-of-concepts.

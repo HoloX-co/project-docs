@@ -1,0 +1,15 @@
+{
+  "name": "holox-project-docs",
+  "version": "1.0.0",
+  "description": "HoloX Project Documentation with Hugo and Hextra",
+  "scripts": {
+    "dev": "hugo server --buildDrafts --buildFuture",
+    "build": "hugo --minify",
+    "preview": "hugo server --minify --disableFastRender"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0"
+  }
+}

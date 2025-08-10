@@ -1,0 +1,88 @@
+baseURL: "https://holox-co.github.io/project-docs"
+languageCode: "en-us"
+title: "HoloX Project Documentation"
+description: "Central repository for project documentation, decisions, research, and POCs"
+
+# Build configuration
+publishDir: "public"
+contentDir: "content"
+staticDir: "static"
+layoutDir: "layouts"
+
+# Theme configuration
+theme: "hextra"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    lineNos: true
+    style: "github"
+
+params:
+  # Navigation
+  navbar:
+    displayTitle: true
+    displayLogo: false
+    width: "wide"
+
+  # Footer
+  footer:
+    displayCopyright: true
+    displayPoweredBy: false
+
+  # Theme
+  theme:
+    default: "system"
+    displayToggle: true
+
+  # Edit page
+  editPage:
+    enable: true
+    base: "https://github.com/HoloX-co/project-docs/edit/main/content"
+
+  # Search
+  search:
+    enable: true
+    type: "flexsearch"
+
+  # Sidebar
+  sidebar:
+    collapse: false
+
+# Menu configuration
+menu:
+  main:
+    - name: "Architecture"
+      url: "/architecture/"
+      weight: 10
+    - name: "Decisions"
+      url: "/decisions/"
+      weight: 20
+    - name: "Research"
+      url: "/research/"
+      weight: 30
+    - name: "POCs"
+      url: "/poc/"
+      weight: 40
+    - name: "Guides"
+      url: "/guides/"
+      weight: 50
+    - name: "Meetings"
+      url: "/meetings/"
+      weight: 60
+
+# Taxonomies
+taxonomies:
+  tag: "tags"
+  category: "categories"
+
+# Security
+security:
+  exec:
+    allow:
+      - "^dart-sass-embedded$"
+      - "^go$"
+      - "^npx$"
+      - "^postcss$"
