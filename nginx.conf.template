@@ -1,0 +1,29 @@
+server {
+  listen 80;
+
+  error_page 401 403 = @auth_error;
+  
+  location @auth_error {
+    return 302 ${CREATE_URL};
+  }
+
+
+  location / {
+    auth_request .auth;
+    auth_request_set $auth_status $upstream_status;
+    auth_request_set $auth_token  $upstream_http_x_ent_auth;
+    root /usr/share/nginx/html/;
+    include /etc/nginx/mime.types;
+  }
+
+  location .auth {
+    internal;
+    proxy_pass http://api:8089/api/v1/auth/me;
+  }
+
+  gzip on;
+  gzip_vary on;
+  gzip_proxied any;
+  gzip_comp_level 6;
+  gzip_types application/wasm application/octet-stream text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;
+}
