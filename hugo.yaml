@@ -49,7 +49,7 @@ params:
   # Search
   search:
     enable: true
-    type: "flexsearch"
+    type: "pagefind"
 
   # Sidebar
   sidebar:

@@ -55,7 +55,9 @@ jobs:
         run: hugo mod tidy
         
       - name: Build site
-        run: hugo --minify
+        run: |
+          hugo --minify
+          npx -y pagefind --site public
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
