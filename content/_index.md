@@ -1,67 +1,21 @@
 ---
-title: "HoloX Project Documentation"
-description: "Central repository for project documentation, decisions, research, and POCs"
-toc: false
+layout: hextra-home
+css: ["static/css/styles.css"]
 ---
 
-# HoloX Project Documentation
+<link rel="stylesheet" href="/css/tailwind.css">
 
-Welcome to the central documentation repository for HoloX projects. This repository serves as a single source of truth for all project-related documentation, decisions, research, and proof-of-concepts.
+<body class="bg">
+<div class="custom-container flex flex-col items-center">
 
-## 📁 Repository Structure
+  <div class="text-title">
+    <span class="font-bold">HoloX</span>
+  </div>
 
-### 🏗️ [Architecture](architecture/)
-System architecture documentation, diagrams, and design decisions.
+  <div class="font-regular text-h3 text-gray-500 dark:text-gray-600 text-center text-md leading-2
+ mt-3 mb-5">We Believe in the Power of Collaboration</div>
 
-### 🎯 [Decisions](decisions/)
-Architectural Decision Records (ADRs) documenting important project decisions.
-- [ADR-0001: Documentation Strategy](decisions/ADR-0001-documentation-strategy.md)
+  <!-- <a href="docs/" class="cta-button text-button1 color-primary">Documentation</a> -->
+</div>
 
-### 🔬 [Research](research/)
-Research documentation, market analysis, and technology evaluations.
-
-### 🧪 [POCs (Proof of Concepts)](poc/)
-Documentation for prototypes and proof-of-concept implementations.
-
-### 📖 [Guides](guides/)
-How-to guides, onboarding documentation, and contribution guidelines.
-
-### 📅 [Meetings](meetings/)
-Meeting notes, minutes, and action items organized by date.
-
-## 🚀 Quick Start
-
-### For New Team Members
-1. Start with the [Architecture Overview](architecture/)
-2. Review recent [Decisions](decisions/)
-3. Check out our [Guides](guides/) section
-
-### For Contributors
-1. Review our [Contribution Guidelines](guides/)
-2. Use the templates in [`_templates/`](_templates/) for new documentation
-3. Follow the established documentation structure
-
-## 📝 Documentation Templates
-
-We provide templates to ensure consistency across all documentation:
-
-- **[Decision Template](_templates/decision-template.md)** - For ADRs
-- **[Research Template](_templates/research-template.md)** - For research documentation
-- **[POC Template](_templates/poc-template.md)** - For proof-of-concept documentation
-
-## 🔗 Important Links
-
-- [GitHub Repository](https://github.com/HoloX-co/project-docs)
-- [Issues & Discussions](https://github.com/HoloX-co/project-docs/issues)
-
-## 📊 Repository Health
-
-This repository includes automated health checks that run regularly to:
-- ✅ Check for broken links
-- 📅 Identify outdated documentation
-- 🔍 Validate internal references
-- 📋 Generate monthly health reports
-
----
-
-*Last updated: August 10, 2025*
+</body>
