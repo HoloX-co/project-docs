@@ -3,6 +3,9 @@ languageCode: "en-us"
 title: "HoloX Project Documentation"
 description: "Central repository for project documentation, decisions, research, and POCs"
 
+publishDir: "public"
+contentDir: "content"
+staticDir: "static"
 
 markup:
   goldmark:
@@ -25,7 +28,6 @@ module:
   imports:
     - path: github.com/imfing/hextra
 
-# Edit page
 editPage:
   enable: true
   base: "https://github.com/HoloX-co/project-docs/edit/main/content"
