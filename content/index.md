@@ -32,12 +32,12 @@ Meeting notes, minutes, and action items organized by date.
 ## 🚀 Quick Start
 
 ### For New Team Members
-1. Start with the [Architecture Overview](architecture/README.md)
-2. Review recent [Decisions](decisions/README.md)
-3. Check out our [Guides](guides/README.md) section
+1. Start with the [Architecture Overview](architecture/)
+2. Review recent [Decisions](decisions/)
+3. Check out our [Guides](guides/) section
 
 ### For Contributors
-1. Review our [Contribution Guidelines](guides/README.md)
+1. Review our [Contribution Guidelines](guides/)
 2. Use the templates in [`_templates/`](_templates/) for new documentation
 3. Follow the established documentation structure
 
