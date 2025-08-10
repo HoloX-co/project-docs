@@ -1,0 +1,58 @@
+name: Documentation Health Check
+
+on:
+  schedule:
+    # Run monthly on the 1st at 9 AM UTC
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+
+jobs:
+  doc-health:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Check for outdated files
+      run: |
+        echo "# Documentation Health Report" > health-report.md
+        echo "Generated on: $(date)" >> health-report.md
+        echo "" >> health-report.md
+        
+        # Find files older than 6 months
+        echo "## Files not updated in 6+ months:" >> health-report.md
+        find . -name "*.md" -type f -mtime +180 -not -path "./.git/*" -not -path "./node_modules/*" | while read file; do
+          last_modified=$(stat -c %y "$file" | cut -d' ' -f1)
+          echo "- $file (last modified: $last_modified)" >> health-report.md
+        done
+        
+        # Check for empty README files
+        echo "" >> health-report.md
+        echo "## Empty or minimal README files:" >> health-report.md
+        find . -name "README.md" -type f -not -path "./.git/*" | while read file; do
+          if [ $(wc -l < "$file") -lt 5 ]; then
+            echo "- $file ($(wc -l < "$file") lines)" >> health-report.md
+          fi
+        done
+        
+        # Check for broken internal links
+        echo "" >> health-report.md
+        echo "## Potential internal link issues:" >> health-report.md
+        grep -r "\[.*\](\..*\.md)" . --include="*.md" | grep -v ".git" | while read line; do
+          file=$(echo "$line" | cut -d':' -f1)
+          link=$(echo "$line" | grep -o "](\..*\.md)" | sed 's/](//' | sed 's/)//')
+          if [ ! -f "$(dirname "$file")/$link" ] && [ ! -f "$link" ]; then
+            echo "- Broken link in $file: $link" >> health-report.md
+          fi
+        done
+        
+    - name: Create Issue From File
+      uses: peter-evans/create-issue-from-file@v5
+      with:
+        title: Monthly Documentation Health Report
+        content-filepath: ./health-report.md
+        labels: |
+          documentation
+          health-check
+          automated issue
