@@ -20,7 +20,7 @@ jobs:
     - name: Check links in markdown files
       uses: lycheeverse/lychee-action@v1
       with:
-        args: --verbose --no-progress './**/*.md'
+        args: --verbose --no-progress --exclude-path content/_templates './**/*.md'
         fail: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -7,7 +7,7 @@ draft: true
 # ADR-NNNN: [Title]
 
 ## Status
-[Proposed | Accepted | Deprecated | Superseded by [ADR-NNNN](./ADR-NNNN.md)]
+[Proposed | Accepted | Deprecated | Superseded by ADR-XXXX]
 
 ## Context
 [Describe the problem/opportunity and the forces at play]
