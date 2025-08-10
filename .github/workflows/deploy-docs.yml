@@ -42,23 +42,28 @@ jobs:
       - name: Install Node dependencies
         run: npm install
         
-      - name: Allow git and go for Hugo
-        run: echo 'HUGO_SECURITY_EXEC_ALLOW=git,go' >> $GITHUB_ENV
-        
       - name: Initialize Hugo module only if missing
         run: |
           if [ ! -f go.mod ]; then
             hugo mod init github.com/HoloX-co/project-docs
           fi
+        env:
+          HUGO_SECURITY_EXEC_ALLOW: git,go
         
       - name: Get Hugo modules
         run: hugo mod get github.com/imfing/hextra
+        env:
+          HUGO_SECURITY_EXEC_ALLOW: git,go
         
       - name: Tidy Hugo modules
         run: hugo mod tidy
+        env:
+          HUGO_SECURITY_EXEC_ALLOW: git,go
         
       - name: Build site
         run: hugo --minify
+        env:
+          HUGO_SECURITY_EXEC_ALLOW: git,go
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
