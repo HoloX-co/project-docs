@@ -3,6 +3,9 @@ languageCode: "en-us"
 title: "HoloX Project Documentation"
 description: "Central repository for project documentation, decisions, research, and POCs"
 
+relativeURLs: false
+canonifyURLs: false
+
 publishDir: "public"
 contentDir: "content"
 staticDir: "static"
