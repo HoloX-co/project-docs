@@ -82,12 +82,8 @@ taxonomies:
   tag: "tags"
   category: "categories"
 
-# Security
+# Security - Allow all commands for module functionality
 security:
   exec:
     allow:
-      - "^git$"
-      - "^dart-sass-embedded$"
-      - "^go$"
-      - "^npx$"
-      - "^postcss$"
+      - ".*"

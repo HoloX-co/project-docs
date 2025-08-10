@@ -45,25 +45,17 @@ jobs:
       - name: Initialize Hugo module only if missing
         run: |
           if [ ! -f go.mod ]; then
-            hugo mod init github.com/HoloX-co/project-docs
+            HUGO_SECURITY_EXEC_ALLOW=git,go hugo mod init github.com/HoloX-co/project-docs
           fi
-        env:
-          HUGO_SECURITY_EXEC_ALLOW: git,go
         
       - name: Get Hugo modules
-        run: hugo mod get github.com/imfing/hextra
-        env:
-          HUGO_SECURITY_EXEC_ALLOW: git,go
+        run: HUGO_SECURITY_EXEC_ALLOW=git,go hugo mod get github.com/imfing/hextra
         
       - name: Tidy Hugo modules
-        run: hugo mod tidy
-        env:
-          HUGO_SECURITY_EXEC_ALLOW: git,go
+        run: HUGO_SECURITY_EXEC_ALLOW=git,go hugo mod tidy
         
       - name: Build site
-        run: hugo --minify
-        env:
-          HUGO_SECURITY_EXEC_ALLOW: git,go
+        run: HUGO_SECURITY_EXEC_ALLOW=git,go hugo --minify
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
