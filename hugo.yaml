@@ -7,10 +7,14 @@ description: "Central repository for project documentation, decisions, research,
 publishDir: "public"
 contentDir: "content"
 staticDir: "static"
-layoutDir: "layouts"
 
 # Theme configuration
 theme: "hextra"
+
+# Module configuration for Hextra
+module:
+  imports:
+    - path: github.com/imfing/hextra
 
 markup:
   goldmark:
@@ -19,6 +23,9 @@ markup:
   highlight:
     lineNos: true
     style: "github"
+
+enableRobotsTXT: true
+enableGitInfo: true
 
 params:
   # Navigation

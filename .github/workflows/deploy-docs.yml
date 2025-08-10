@@ -21,8 +21,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive
           fetch-depth: 0
+          
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
           
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -35,15 +39,9 @@ jobs:
         with:
           node-version: '18'
           
-      - name: Install Hextra theme
-        run: |
-          git submodule add https://github.com/imfing/hextra.git themes/hextra || true
-          git submodule update --init --recursive
-          
-      - name: Install dependencies
-        run: |
-          npm install -D postcss postcss-cli autoprefixer
-          
+      - name: Install Node dependencies
+        run: npm install
+        
       - name: Build site
         run: hugo --minify
         
