@@ -42,14 +42,20 @@ jobs:
       - name: Install Node dependencies
         run: npm install
         
-      - name: Initialize Hugo modules
-        run: hugo mod init github.com/HoloX-co/project-docs || true
+      - name: Initialize Hugo module only if missing
+        run: |
+          if [ ! -f go.mod ]; then
+            hugo mod init github.com/HoloX-co/project-docs
+          fi
         
       - name: Get Hugo modules
         run: hugo mod get github.com/imfing/hextra
         
       - name: Tidy Hugo modules
         run: hugo mod tidy
+        
+      - name: Allow git for Hugo
+        run: echo 'HUGO_SECURITY_EXEC_ALLOW=git' >> $GITHUB_ENV
         
       - name: Build site
         run: hugo --minify
