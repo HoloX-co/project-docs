@@ -1,4 +1,4 @@
-baseURL: https://example.com/
+baseURL: "https://holox-co.github.io/project-docs"
 languageCode: "en-us"
 title: "HoloX Project Documentation"
 description: "Central repository for project documentation, decisions, research, and POCs"
