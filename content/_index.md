@@ -1,6 +1,6 @@
 ---
 layout: hextra-home
-css: ["static/css/styles.css"]
+css: ["/static/css/styles.css"]
 ---
 
 <link rel="stylesheet" href="/css/tailwind.css">
