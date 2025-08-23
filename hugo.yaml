@@ -1,4 +1,4 @@
-baseURL: /
+baseURL: https://example.com/project-docs/
 languageCode: "en-us"
 title: "HoloX Project Documentation"
 description: "Central repository for project documentation, decisions, research, and POCs"
@@ -52,7 +52,3 @@ params:
         dark: images/logo_dark.svg
         width: 120
       width: wide
-
-  # Custom CSS files
-  customCSS:
-    - "/css/custom.css"
