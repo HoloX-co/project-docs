@@ -19,22 +19,24 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.147.7
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          fetch-tags: true
           
       - name: Setup Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.21'
+          go-version: '1.24'
           
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          extended: true
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
           
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -56,13 +58,22 @@ jobs:
       - name: Tidy Hugo modules
         run: hugo mod tidy
         
-      - name: Build site
-        run: |
-          hugo --minify
-          npx -y pagefind --site public
-        
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        id: pages
+        uses: actions/configure-pages@v5
+        
+      - name: Make build script executable
+        run: chmod +x ./build.sh
+        
+      - name: Build all site versions
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          ./build.sh "${{ steps.pages.outputs.base_url }}"
+          
+      - name: Add search functionality
+        run: npx -y pagefind --site public
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
