@@ -2,7 +2,7 @@
 set -e
 
 # Specify the base URL
-BASE_URL=${1:-"http://localhost:1313"}/project-docs/
+BASE_URL=${1:-"http://localhost:1313"}
 
 echo "Using base URL: $BASE_URL"
 
