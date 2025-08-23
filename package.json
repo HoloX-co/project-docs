@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "HoloX Project Documentation with Hugo and Hextra",
   "scripts": {
-    "dev": "hugo server --buildDrafts --buildFuture",
-    "build": "hugo --minify",
-    "preview": "hugo server --minify --disableFastRender"
+    "start": "npm run build:css && hugo server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx tailwindcss -i ./assets/css/tailwind.css -o ./static/css/tailwind.css",
+    "build:css:watch": "npx tailwindcss -i ./assets/css/tailwind.css -o ./static/css/tailwind.css --watch",
+    "build": "npm run build:css && hugo --destination ./dist/ --minify"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

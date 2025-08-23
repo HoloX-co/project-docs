@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+apk add --no-cache git go
+apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo
+
 # Specify the base URL
 BASE_URL=${1:-"http://localhost:1313"}
 
@@ -15,6 +18,7 @@ GIT_HASH=$(git rev-parse --short HEAD)
 echo "Building from commit: $GIT_HASH"
 
 # Build the site
+npm run build:css
 hugo \
   --minify \
   --baseURL "$BASE_URL/" \
