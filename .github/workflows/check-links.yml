@@ -22,10 +22,29 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-    - name: Check links in CSS files
+    - name: List files to be checked
+      run: |
+        echo "=== Files that will be checked ==="
+        echo "CSS files in assets:"
+        find ./assets -name "*.css" -type f 2>/dev/null || echo "No CSS files found in assets"
+        echo "CSS files in static:"
+        find ./static -name "*.css" -type f 2>/dev/null || echo "No CSS files found in static"
+        echo "All CSS files:"
+        find . -name "*.css" -type f 2>/dev/null || echo "No CSS files found"
+        echo "================================"
+        
+    - name: Check links in CSS files (assets)
       uses: lycheeverse/lychee-action@v1
       with:
-        args: --verbose --no-progress --include-verbatim './**/*.css'
+        args: --verbose --no-progress --include-verbatim 'assets/**/*.css'
+        fail: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Check links in CSS files (static) 
+      uses: lycheeverse/lychee-action@v1
+      with:
+        args: --verbose --no-progress --include-verbatim 'static/**/*.css'
         fail: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -33,7 +52,7 @@ jobs:
     - name: Check asset file references
       uses: lycheeverse/lychee-action@v1
       with:
-        args: --verbose --no-progress --include-verbatim './assets/**/*.{js,css,scss,sass}'
+        args: --verbose --no-progress --include-verbatim 'assets/**/*.{js,scss,sass}'
         fail: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -41,48 +60,90 @@ jobs:
     - name: Check static file references
       uses: lycheeverse/lychee-action@v1
       with:
-        args: --verbose --no-progress --include-verbatim './static/**/*.{js,css,html}'
+        args: --verbose --no-progress --include-verbatim 'static/**/*.{js,html}'
         fail: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Verify image assets exist
       run: |
-        echo "Checking for referenced images in CSS files..."
+        echo "=== Checking for referenced images in CSS files ==="
+        
+        # First, list all CSS files we're checking
+        echo "CSS files found:"
+        find . -name "*.css" -type f | head -10
+        echo ""
+        
         # Extract image references from CSS files
-        find . -name "*.css" -type f -exec grep -l "url(" {} \; | while read cssfile; do
+        css_files_with_urls=$(find . -name "*.css" -type f -exec grep -l "url(" {} \;)
+        
+        if [ -z "$css_files_with_urls" ]; then
+          echo "No CSS files with url() references found"
+          exit 0
+        fi
+        
+        echo "$css_files_with_urls" | while read cssfile; do
           echo "Checking CSS file: $cssfile"
-          grep -o "url([^)]*)" "$cssfile" | sed 's/url(\(.*\))/\1/' | sed 's/['"'"'"]//g' | while read imgpath; do
-            # Handle relative paths
+          
+          # Extract URLs and clean them up
+          grep -o "url([^)]*)" "$cssfile" | while read urlref; do
+            # Remove url( and )
+            imgpath=$(echo "$urlref" | sed 's/url(\(.*\))/\1/' | sed 's/['"'"'"]//g')
+            
+            echo "  Found reference: $imgpath"
+            
+            # Skip external URLs
+            if [[ $imgpath == http* ]]; then
+              echo "    ↳ External URL, skipping local check"
+              continue
+            fi
+            
+            # Handle different path types
             if [[ $imgpath == ../* ]]; then
-              # Convert relative path to absolute from CSS location
+              # Relative path going up
               cssdir=$(dirname "$cssfile")
               fullpath="$cssdir/$imgpath"
-              fullpath=$(realpath -m "$fullpath")
+              # Normalize the path
+              fullpath=$(realpath -m "$fullpath" 2>/dev/null || echo "$fullpath")
             elif [[ $imgpath == /* ]]; then
               # Absolute path from project root
               fullpath=".$imgpath"
+            elif [[ $imgpath == ./* ]]; then
+              # Relative path from CSS file
+              cssdir=$(dirname "$cssfile")
+              fullpath="$cssdir/$imgpath"
             else
-              # Relative to CSS file
+              # Simple relative path
               cssdir=$(dirname "$cssfile")
               fullpath="$cssdir/$imgpath"
             fi
             
+            echo "    ↳ Resolved to: $fullpath"
+            
+            # Check if file exists
             if [ -f "$fullpath" ]; then
-              echo "✓ Found: $imgpath -> $fullpath"
+              echo "    ✓ Found: $fullpath"
             else
-              echo "✗ Missing: $imgpath (expected at $fullpath)"
-              # Check in static directory as well
-              staticpath="./static${imgpath}"
+              echo "    ✗ Missing: $fullpath"
+              
+              # Try alternative locations
+              staticpath="./static$imgpath"
+              publicpath="./public$imgpath"
+              
               if [ -f "$staticpath" ]; then
-                echo "  ✓ Found in static: $staticpath"
+                echo "      ✓ Found alternative in static: $staticpath"
+              elif [ -f "$publicpath" ]; then
+                echo "      ✓ Found alternative in public: $publicpath"
               else
-                echo "  ✗ Not found in static either"
+                echo "      ✗ Not found in any location"
+                echo "ERROR: Missing asset reference: $imgpath in $cssfile"
                 exit 1
               fi
             fi
           done
         done
+        
+        echo "=== Asset verification complete ==="
         
     - name: Create Issue From File
       if: failure()
