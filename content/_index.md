@@ -4,7 +4,6 @@ css: ["static/css/styles.css"]
 ---
 
 <link rel="stylesheet" href="css/tailwind.css">
-<link rel="stylesheet" href="css/custom.css">
 
 <body class="bg">
 <div class="custom-container flex flex-col items-center">

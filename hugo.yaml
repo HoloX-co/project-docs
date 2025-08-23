@@ -31,6 +31,33 @@ module:
   imports:
     - path: github.com/imfing/hextra
 
+params:
+  description: "Central repository for project documentation, decisions, research, and POCs"
+  
+  # Theme configuration
+  theme:
+    default: system
+    displayToggle: true
+
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/logo_light.svg
+      dark: images/logo_dark.svg
+      width: 120
+    width: wide
+
+  page:
+    width: wide
+
+  footer:
+    displayCopyright: true
+    displayPoweredBy: true
+
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"
+
 editPage:
   enable: true
   base: "https://github.com/HoloX-co/project-docs/edit/main/content"
@@ -50,15 +77,3 @@ menu:
 taxonomies:
   tag: "tags"
   category: "categories"
-
-params:
-  description: Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.
-
-  navbar:
-      displayTitle: false
-      displayLogo: true
-      logo:
-        path: images/logo_light.svg
-        dark: images/logo_dark.svg
-        width: 120
-      width: wide
