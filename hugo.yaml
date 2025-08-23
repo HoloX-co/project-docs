@@ -55,4 +55,4 @@ params:
 
   # Custom CSS files
   customCSS:
-    - "css/custom.css"
+    - "/css/custom.css"
