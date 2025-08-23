@@ -12,13 +12,13 @@
 
 
 .bg {
-  background-image: url('../../images/Background_gradient_light.png');
+  background-image: url('/project-docs/images/Background_gradient_light.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 .dark .bg {
-  background-image: url('../../images/Background_gradient_dark.png');
+  background-image: url('/project-docs/images/Background_gradient_dark.png');
 }
 
 /* Custom Container */
