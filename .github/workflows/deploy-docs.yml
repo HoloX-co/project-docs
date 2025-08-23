@@ -73,7 +73,7 @@ jobs:
           ./build.sh "${{ steps.pages.outputs.base_url }}"
           
       - name: Add search functionality
-        run: npx -y pagefind --site public
+        run: npx -y pagefind --site 'project-docs'
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
