@@ -65,3 +65,4 @@ params:
 
 custom:
   css: "custom.css"
+  css: "tailwind.css"

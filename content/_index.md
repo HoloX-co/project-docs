@@ -1,9 +1,6 @@
 ---
 layout: hextra-home
-css: ["static/css/styles.css"]
 ---
-
-<link rel="stylesheet" href="/css/tailwind.css">
 
 <body class="bg">
 <div class="custom-container flex flex-col items-center">
