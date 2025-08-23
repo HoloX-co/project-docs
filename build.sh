@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-apk add --no-cache git go
-apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo
-
 # Specify the base URL
 BASE_URL=${1:-"http://localhost:1313"}
 
