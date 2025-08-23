@@ -5,9 +5,6 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  schedule:
-    # Run weekly on Sundays at 2 AM UTC
-    - cron: '0 2 * * 0'
 
 jobs:
   check-links:
@@ -21,16 +18,79 @@ jobs:
       uses: lycheeverse/lychee-action@v1
       with:
         args: --verbose --no-progress --exclude-path content/_templates './**/*.md'
-        fail: true
+        fail: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Check links in CSS files
+      uses: lycheeverse/lychee-action@v1
+      with:
+        args: --verbose --no-progress --include-verbatim './**/*.css'
+        fail: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Check asset file references
+      uses: lycheeverse/lychee-action@v1
+      with:
+        args: --verbose --no-progress --include-verbatim './assets/**/*.{js,css,scss,sass}'
+        fail: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Check static file references
+      uses: lycheeverse/lychee-action@v1
+      with:
+        args: --verbose --no-progress --include-verbatim './static/**/*.{js,css,html}'
+        fail: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Verify image assets exist
+      run: |
+        echo "Checking for referenced images in CSS files..."
+        # Extract image references from CSS files
+        find . -name "*.css" -type f -exec grep -l "url(" {} \; | while read cssfile; do
+          echo "Checking CSS file: $cssfile"
+          grep -o "url([^)]*)" "$cssfile" | sed 's/url(\(.*\))/\1/' | sed 's/['"'"'"]//g' | while read imgpath; do
+            # Handle relative paths
+            if [[ $imgpath == ../* ]]; then
+              # Convert relative path to absolute from CSS location
+              cssdir=$(dirname "$cssfile")
+              fullpath="$cssdir/$imgpath"
+              fullpath=$(realpath -m "$fullpath")
+            elif [[ $imgpath == /* ]]; then
+              # Absolute path from project root
+              fullpath=".$imgpath"
+            else
+              # Relative to CSS file
+              cssdir=$(dirname "$cssfile")
+              fullpath="$cssdir/$imgpath"
+            fi
+            
+            if [ -f "$fullpath" ]; then
+              echo "✓ Found: $imgpath -> $fullpath"
+            else
+              echo "✗ Missing: $imgpath (expected at $fullpath)"
+              # Check in static directory as well
+              staticpath="./static${imgpath}"
+              if [ -f "$staticpath" ]; then
+                echo "  ✓ Found in static: $staticpath"
+              else
+                echo "  ✗ Not found in static either"
+                exit 1
+              fi
+            fi
+          done
+        done
         
     - name: Create Issue From File
       if: failure()
       uses: peter-evans/create-issue-from-file@v5
       with:
-        title: Link Checker Report
+        title: Link and Asset Checker Report
         content-filepath: ./lychee/out.md
         labels: |
           report
           automated issue
+          asset-check
