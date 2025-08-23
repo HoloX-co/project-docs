@@ -1,5 +1,4 @@
-@tailwind base;
-@tailwind components;
+/* Import only Tailwind utilities, not base styles that conflict with Hextra */
 @tailwind utilities;
 
 * {
