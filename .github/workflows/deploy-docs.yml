@@ -58,7 +58,7 @@ jobs:
         
       - name: Build site
         run: |
-          hugo --minify
+          hugo build
           npx -y pagefind --site public
         
       - name: Setup Pages

@@ -62,3 +62,6 @@ params:
         dark: images/logo_dark.svg
         width: 120
       width: wide
+
+custom:
+  css: "custom.css"
