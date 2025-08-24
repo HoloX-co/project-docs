@@ -2,7 +2,7 @@
 layout: hextra-home
 ---
 
-
+<body class="bg" style="min-height: 100vh; width: 100%;">
 <div class="hx:mt-6 hx:mb-[200px]">
 {{< hextra/hero-headline >}}
   HoloX
@@ -30,3 +30,4 @@ layout: hextra-home
 </div>
 
 <div class="hx:mt-6"></div>
+</body>
