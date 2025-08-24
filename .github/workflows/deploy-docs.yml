@@ -53,10 +53,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-npm-
 
-      - name: Authenticate to npm (optional)
-        if: ${{ secrets.NPM_TOKEN != '' }}
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
       - name: Install Node dependencies with retry
         run: |
           npm config set fetch-retries 5
