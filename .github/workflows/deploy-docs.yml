@@ -44,6 +44,38 @@ jobs:
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Authenticate to npm (optional)
+        if: secrets.NPM_TOKEN != ''
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Install Node dependencies with retry
+        run: |
+          npm config set fetch-retries 5
+          npm config set fetch-retry-mintimeout 10000
+          npm config set fetch-retry-maxtimeout 60000
+          attempts=0
+          until [ "$attempts" -ge 5 ]; do
+            if npm install --no-audit --no-fund; then
+              break
+            fi
+            attempts=$((attempts+1))
+            echo "npm install failed (attempt $attempts). Retrying in $((5 * attempts)) seconds..."
+            sleep $((5 * attempts))
+          done
+          if [ "$attempts" -ge 5 ]; then
+            echo "npm install failed after multiple retries" >&2
+            exit 1
+          fi
+
       - name: Build with Hugo
         env:
           # For maximum backward compatibility with Hugo modules
