@@ -1,3 +1,10 @@
+/* 
+ * Tailwind CSS for Hextra
+ * This file ensures Tailwind's base styles are properly loaded
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add any custom Tailwind utilities here */
