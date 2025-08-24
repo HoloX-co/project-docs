@@ -64,5 +64,6 @@ params:
       width: wide
 
 custom:
-  css: "custom.css"
-  css: "tailwind.css"
+  css:
+    - "custom.css"
+    - "tailwind.css"

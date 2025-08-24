@@ -1,3 +1,8 @@
+/* 
+ * Tailwind CSS for Hextra
+ * This file ensures Tailwind's base styles are properly loaded
+ */
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -106,9 +111,9 @@
   --tw-contain-style:  ;
 }
 
-/*
-! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
-*/
+/* 
+ ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+ */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -558,64 +563,4 @@ video {
   position: static;
 }
 
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
-}
-
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.font-bold {
-  font-family: Bold, sans-serif;
-}
-
-.font-regular {
-  font-family: Regular, sans-serif;
-}
-
-.text-button1 {
-  font-size: 1.125rem;
-}
-
-.text-h3 {
-  font-size: 1.5625rem;
-}
-
-.text-title {
-  font-size: 5rem;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.font-regular {
-  font-weight: 400;
-}
-
-.text-gray-500 {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity, 1));
-}
-
-.dark\:text-gray-600:is(html[class~="dark"] *) {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
-}
+/* Add any custom Tailwind utilities here */
