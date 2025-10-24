@@ -1,5 +1,5 @@
 ---
-title: "Feature X Prototype"
+
 description: "Documentation for Feature X proof of concept"
 ---
 

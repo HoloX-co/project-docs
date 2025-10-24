@@ -1,5 +1,5 @@
 ---
-title: "August 2025 Meetings"
+
 description: "Meeting notes and minutes for August 2025"
 ---
 

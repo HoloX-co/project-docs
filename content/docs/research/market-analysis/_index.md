@@ -1,5 +1,5 @@
 ---
-title: "Market Analysis"
+
 description: "Market research and competitive analysis"
 ---
 

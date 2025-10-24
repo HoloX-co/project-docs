@@ -1,5 +1,5 @@
 ---
-title: "Integration Test Results"
+
 description: "Documentation of integration testing outcomes"
 ---
 

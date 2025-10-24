@@ -1,5 +1,5 @@
 ---
-title: "Technology Evaluations"
+
 description: "Technical research and technology stack evaluations"
 ---
 
