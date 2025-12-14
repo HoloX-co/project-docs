@@ -99,3 +99,17 @@ The criteria prioritization is as follows:
 * **Minimal GMS Dependency (10% Weight):** Essential for full compatibility and reduced complexity within the Amazon ecosystem.
 
 ---
+
+## 4. 🏆 Final Technology Selection
+
+Based on the absolute prioritization of UX and Performance, **Native Android Development (Kotlin)** is the definitive choice for the POC. 
+
+**Justification for Native Android:**
+
+The choice is driven by the need for maximum risk mitigation in the highest-weighted areas.
+
+1.  **Guaranteed Quality (75% of the Decision):** Given that 75% of the total weight is placed on achieving **uncompromised UI/UX and Performance**, Native Android is the only technology that can guarantee a perfect score. Using native tools like **Jetpack Compose for TV** ensures the highest visual quality and direct access to the platform's rendering engine for guaranteed 60 FPS performance.
+2.  **Flawless Focus Management:** For a TV application, reliable navigation using the remote (D-Pad) is essential. Only Native Android provides the tools necessary for perfect, platform-standard **Focus Management**, which is difficult to replicate flawlessly with cross-platform bridges.
+3.  **Lowest Risk Path:** Despite the fact that other options score highly on initial Development Velocity, Native Android poses the lowest risk of incurring significant delays due to complex debugging or failure to meet the required UX quality standard.
+
+**Conclusion:** Native Android Development is the only solution that meets the non-negotiable requirement of delivering a high-fidelity, best-in-class UX for the Fire OS POC.
