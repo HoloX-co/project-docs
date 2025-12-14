@@ -79,3 +79,23 @@ The goal of this section is to find all the options with which you can build an 
 
 ---
 
+## 3. Important Criterias for our Usecase
+
+The success of the Proof of Concept (POC) is measured solely by its ability to deliver an exceptionally high-quality user experience and visual fidelity on the Fire OS platform.
+
+### A) Defining the Usecase
+
+The primary goal of this Proof of Concept (POC) is to demonstrate the **highest possible standard of User Interface (UI) and User Experience (UX)** on the Fire OS platform. The application must feature a smooth, simple, and highly responsive page designed to showcase optimal visual fidelity and navigation quality for the end-user.
+
+### B) Weighted Selection Criteria
+
+The selection criteria are weighted to reflect the critical importance of visual quality and responsiveness. **UI/UX and Performance are the absolute top priority (75% of the decision).**
+
+The criteria prioritization is as follows:
+
+* **Native TV User Experience (UX) (40% Weight):** This is the most critical factor. It must guarantee flawless visual adherence to Fire OS standards and perfect **Focus Management** for D-Pad remote navigation, ensuring a true native feel.
+* **Performance (UI Smoothness & Responsiveness) (35% Weight):** The second most critical factor. It must ensure zero lag, high frame rates (60 FPS), and silky-smooth scrolling to showcase quality.
+* **Development Velocity (POC Speed) (15% Weight):** Development speed is very important for quick iteration, but not the most critical factor, as quality cannot be sacrificed.
+* **Minimal GMS Dependency (10% Weight):** Essential for full compatibility and reduced complexity within the Amazon ecosystem.
+
+---
